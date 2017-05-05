@@ -6,8 +6,8 @@
  - 无需注册、无需账号，免费服务，学术研究之利器
 
 ### 安装：
- - 方式1，chrome插件商店 https://chrome.google.com/webstore/search/green-hub%20proxy?hl=zh-CN 
-  选择green-hub proxy，即可安装&使用。
+ - 方式1，chrome插件商店
+   - https://chrome.google.com/webstore/search/green-hub%20proxy?hl=zh-CN  ; 选择green-hub proxy，即可安装&使用。
   
  - 方式2，直接在本目录、下载该软件，chrome只导入即可使用。
 
