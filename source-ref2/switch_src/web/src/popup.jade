@@ -1,0 +1,164 @@
+doctype html
+//
+  Copyright 2017 The SwitchyOmega Authors. Please see the AUTHORS file
+  for details.
+
+  This file is part of SwitchyOmega.
+
+  SwitchyOmega is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  SwitchyOmega is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with SwitchyOmega.  If not, see <http://www.gnu.org/licenses/>.
+html(lang='en' ng-app='omegaPopup' ng-controller='PopupCtrl' ng-csp)
+  head
+    meta(charset='utf-8')
+    title {{'popup_title' | tr}}
+    link(rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet' href='css/popup.css')
+  body(ng-class='{"with-condition-form": showConditionForm}')
+    ul.popup-menu-nav.nav.nav-pills.nav-stacked(ng-hide='showConditionForm || proxyNotControllable || showRequestInfo')
+      li.profile(ng-repeat='profile in builtinProfiles' ng-class='{active: isActive(profile.name), "bg-info": isEffective(profile.name)}')
+        a(href='#' role='button' ng-attr-tabindex='{{100 + $index}}' ng-click='applyProfile(profile)' title='{{getProfileTitle(profile)}}'
+          data-shortcut='+{{profile.name}}')
+          span(omega-profile-inline='profile' icon='getIcon(profile)' options='availableProfiles' disp-name='dispNameFilter')
+      li.profile.external-profile(ng-show='!requestInfoProvided && !!externalProfile' ng-class='{active: isActive(""), "bg-info": isEffective("")}')
+        a(href='#' role='button' ng-click='nameExternal.open = true' title='{{getProfileTitle(externalProfile)}}' data-shortcut='external')
+          form(name='nameExternalForm' ng-submit='nameExternalForm.$valid && saveExternal()')
+            span(omega-profile-icon='externalProfile' icon='getIcon(externalProfile, "normal")' options='availableProfiles' disp-name='dispNameFilter')
+            = ' '
+            span(ng-show='!nameExternal.open') {{'popup_externalProfile' | tr}}
+            input.form-control(ng-show='!!nameExternal.open' ng-model='externalProfile.name' ng-blur='nameExternalForm.submit()'
+              placeholder='{{"popup_externalProfileName" | tr}}' ui-validate='validateProfileName' autofocus)
+      li.request-info(ng-show='!!requestInfoProvided' class='bg-warning')
+        a(href='#' role='button' ng-click='showRequestInfo = true' data-shortcut='requestInfo')
+          span.glyphicon.glyphicon-warning-sign.text-warning
+          = ' '
+          | {{'popup_requestErrorCount' | tr:[requestInfo.errorCount]}}
+      li.divider
+      li.profile.custom-profile(ng-repeat='profile in customProfiles' ng-class='{active: isActive(profile.name), "bg-info": isEffective(profile.name)}'
+        dropdown)
+        a(href='#' role='button' ng-click='applyProfile(profile)' ng-if='!profile.validResultProfiles' title='{{getProfileTitle(profile)}}')
+          span(omega-profile-inline='profile' icon='getIcon(profile)' options='availableProfiles' disp-name='dispNameFilter')
+        a.profile-with-default-edit(href='#' role='button' ng-click='applyProfile(profile)' ng-if='!!profile.validResultProfiles' title='{{getProfileTitle(profile)}}')
+          span(omega-profile-inline='profile' icon='getIcon(profile)' options='availableProfiles' disp-name='dispNameFilter')
+          = ' '
+          | [{{profile.defaultProfileName}}]
+          button.dropdown-toggle.btn.btn-default(role='button' dropdown-toggle href='#' ng-click='$event.stopPropagation()')
+            span.glyphicon.glyphicon-chevron-down
+        ul.dropdown-menu(ng-if='!!profile.validResultProfiles')
+          li(ng-repeat='p in profile.validResultProfiles' ng-class='{active: p.name == profile.defaultProfileName}')
+            a(href='#' role='button' ng-click='setDefaultProfile(profile.name, p.name)' title='{{getProfileTitle(profile)}}')
+              span(omega-profile-inline='p' options='availableProfiles' disp-name='dispNameFilter')
+      li.divider(ng-show='!!currentDomain && validResultProfiles.length')
+      li(ng-show='!!currentProfileCanAddRule && !!currentDomain')
+        a(href='#' role='button' ng-click='prepareConditionForm()' data-shortcut='addRule')
+          span.glyphicon.glyphicon-plus
+          = ' '
+          span {{'popup_addCondition' | tr}}
+      li(ng-show='!!currentDomain && validResultProfiles.length' dropdown is-open="tempRuleMenu.open")
+        a.dropdown-toggle(href='#' role='button' dropdown-toggle data-shortcut='tempRule')
+          span.glyphicon.glyphicon-filter
+          = ' '
+          span.current-domain {{currentDomain}}
+          span.caret
+        ul.dropdown-menu
+          li(ng-repeat='profile in validResultProfiles' ng-class='{active: profile.name == currentTempRuleProfile}'
+            ng-show='!!currentTempRuleProfile || validResultProfiles.length == 1 || profile.name != currentProfileName')
+            a(href='#' role='button' ng-click='addTempRule(currentDomain, profile.name)' title='{{getProfileTitle(profile)}}')
+              span(omega-profile-inline='profile' options='availableProfiles' disp-name='dispNameFilter')
+      li.divider
+      li
+        a(href='#' role='button' ng-click='openOptions()' data-shortcut='option')
+          span.glyphicon.glyphicon-wrench
+          = ' '
+          span {{'popup_showOptions' | tr}}
+    form.condition-form(name='conditionForm' style='display: none;'
+      ng-style='{display: showConditionForm ? "block" : "none"}'
+      ng-submit='addCondition(rule.condition, rule.profileName)')
+      fieldset
+        legend
+          | {{'popup_addConditionTo' | tr}}
+          = ' '
+          span.profile-inline
+            span(omega-profile-inline='currentProfile' options='availableProfiles' disp-name='dispNameFilter')
+        div.form-group
+          label
+            | {{'options_conditionType' | tr}}
+            = ' '
+            button.btn.btn-link.btn-sm.clear-padding(type='button' ng-click='openConditionHelp()')
+              | {{"options_showConditionTypeHelp" | tr}}
+              = ' '
+              span.glyphicon.glyphicon-new-window
+          select.form-control(ng-model='rule.condition.conditionType')
+            option(value='HostWildcardCondition') {{'condition_HostWildcardCondition' | tr}}
+            option(value='HostRegexCondition') {{'condition_HostRegexCondition' | tr}}
+            option(value='UrlWildcardCondition') {{'condition_UrlWildcardCondition' | tr}}
+            option(value='UrlRegexCondition') {{'condition_UrlRegexCondition' | tr}}
+            option(value='KeywordCondition') {{'condition_KeywordCondition' | tr}}
+        div.form-group
+          label {{'options_conditionDetails' | tr}}
+          input.form-control.condition-details(type='text' required ng-model='rule.condition.pattern' autofocus)
+        div.form-group
+          label {{'options_resultProfile' | tr}}
+          div(omega-profile-select='validResultProfiles' ng-model='rule.profileName'
+            disp-name='dispNameFilter' options='availableProfiles')
+        div.condition-controls
+          button.btn.btn-default(type='button' ng-click='returnToMenu()')
+            | {{'dialog_cancel' | tr}}
+          button.btn.btn-primary(type='submit' ng-disabled='conditionForm.$invalid') {{'popup_addCondition' | tr}}
+    div.proxy-not-controllable(ng-show='proxyNotControllable')
+      p.text-danger {{'popup_proxyNotControllable_' + proxyNotControllable | tr}}
+      p.help-block {{('popup_proxyNotControllableDetails_' + proxyNotControllable | tr) || ('popup_proxyNotControllableDetails' | tr)}}
+      p.proxy-not-controllable-controls
+        button.btn.btn-default(ng-click='closePopup()') {{'dialog_cancel' | tr}}
+        button.btn.btn-primary(ng-click='openManage()') {{'popup_proxyNotControllableManage' | tr}}
+    div.request-info-details(ng-show='showRequestInfo')
+    form.request-info-details(style='display: none;'
+      ng-style='{display: showRequestInfo ? "block" : "none"}'
+      ng-submit='addConditionForDomains(domainsForCondition, profileForDomains)')
+      fieldset
+        legend(ng-show='!!currentProfileCanAddRule')
+          | {{'popup_addConditionTo' | tr}}
+          = ' '
+          span.profile-inline
+            span(omega-profile-inline='currentProfile' options='availableProfiles' disp-name='dispNameFilter')
+        legend(ng-show='!currentProfileCanAddRule')
+          | {{'popup_requestErrorHeading' | tr}} 
+        .text-warning {{'popup_requestErrorWarning' | tr}}
+        p.help-block {{'popup_requestErrorWarningHelp' | tr}}
+        p.help-block(ng-show='!!currentProfileCanAddRule') {{'popup_requestErrorAddCondition' | tr}} 
+        .checkbox(ng-repeat='domain in requestInfo.domains track by domain.domain')
+          label
+            input(type='checkbox' ng-model='domainsForCondition[domain.domain]' autofocus ng-if='$index === 0')
+            input(type='checkbox' ng-model='domainsForCondition[domain.domain]' ng-if='$index > 0')
+            span.label.label-warning {{domain.errorCount}}
+            =' {{domain.domain}}'
+        div.form-group(ng-show='!!currentProfileCanAddRule')
+          label {{'options_resultProfileForSelectedDomains' | tr}}
+          div(omega-profile-select='validResultProfiles' ng-model='profileForDomains'
+            disp-name='dispNameFilter' options='availableProfiles')
+        p.help-block(ng-show='!currentProfileCanAddRule')
+          | {{'popup_requestErrorCannotAddCondition' | tr}}
+        div.condition-controls
+          button.btn.btn-default(type='button' ng-click='returnToMenu()')
+            | {{'dialog_cancel' | tr}}
+          button.btn.btn-primary(type='submit' ng-show='!!currentProfileCanAddRule') {{'popup_addCondition' | tr}}
+          button.btn.btn-default.pull-right(type='button' ng-show='!currentProfileCanAddRule'
+            ng-click='openOptions("#/general")') {{'popup_configureMonitorWebRequests' | tr}}
+
+    script(src='js/log_error.js')
+    script(src='lib/jquery/jquery.min.js')
+    script(src='lib/angular/angular.min.js')
+    script(src='lib/angular-bootstrap/ui-bootstrap-tpls.min.js')
+    script(src='lib/angular-ui-utils/validate.min.js')
+    script(src='js/omega_target_web.js')
+    script(src='js/omega_decoration.js')
+    script(src='js/popup.js')

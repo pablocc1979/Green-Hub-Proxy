@@ -1,0 +1,58 @@
+.page-header
+  h2 {{'options_tab_ui' | tr}}
+section.settings-group
+  h3 {{'options_group_miscOptions' | tr}}
+  div.checkbox
+    label
+      input(type='checkbox' ng-model='options["-confirmDeletion"]')
+      span {{'options_confirmDeletion' | tr}}
+  div.checkbox
+    label
+      input#refresh-on-profile-change(type='checkbox' ng-model='options["-refreshOnProfileChange"]')
+      span {{'options_refreshOnProfileChange' | tr}}
+  div.checkbox
+    label
+      input(type='checkbox' ng-model='options["-showInspectMenu"]')
+      span {{'options_showInspectMenu' | tr}}
+section.settings-group
+  h3 {{'options_group_keyboardShortcut' | tr}}
+  p
+    button.btn.btn-default(type='button' role='button' ng-click='openShortcutConfig()')
+      span.glyphicon.glyphicon-share-alt
+      = ' '
+      | {{'options_menuShortcutConfigure' | tr}}
+    = ' '
+    | {{'options_menuShortcutHelp' | tr}}
+  p.help-block
+      | {{'options_menuShortcutMore' | tr}}
+section.settings-group
+  h3 {{'options_group_switchOptions' | tr}}
+  div.form-group
+    label {{'options_startupProfile' | tr}}
+    = ' '
+    div(omega-profile-select='options | profiles:"all"' ng-model='options["-startupProfileName"]'
+      default-text="{{'options_startupProfile_none' | tr}}" disp-name='dispNameFilter'
+      style='display: inline-block;' options='options')
+  div.checkbox
+    label
+      input(type='checkbox' ng-model='options["-showConditionTypes"]' ng-true-value='1' ng-false-value='0' omega-int2str)
+      span {{'options_showConditionTypesAdvanced' | tr}}
+    p.help-block
+      | {{'options_showConditionTypesAdvancedHelp' | tr}}
+  div.checkbox
+    label
+      input(type='checkbox' ng-model='options["-enableQuickSwitch"]')
+      span {{'options_quickSwitch' | tr}}
+  #quick-switch-settings.settings-group(ng-show='options["-enableQuickSwitch"]' ng-controller='QuickSwitchCtrl')
+    h4 {{'options_cycledProfiles' | tr}}
+    p.help-block {{'options_cycledProfilesHelp' | tr}}
+    div.has-error(ng-show='options["-quickSwitchProfiles"].length < 2')
+      p.help-block {{'options_cycledProfilesTooFew' | tr}}
+    ul.cycle-profile-container.cycle-enabled(ui-sortable="sortableOptions"
+      ng-model='options["-quickSwitchProfiles"]')
+      li(ng-repeat='name in options["-quickSwitchProfiles"]')
+        span(omega-profile-inline='profileByName(name)' options='options' disp-name='dispNameFilter')
+    h4 {{'options_notCycledProfiles' | tr}}
+    ul.cycle-profile-container(ui-sortable="sortableOptions" ng-model='notCycledProfiles')
+      li.bg-success(ng-repeat='name in notCycledProfiles')
+        span(omega-profile-inline='profileByName(name)' options='options' disp-name='dispNameFilter')

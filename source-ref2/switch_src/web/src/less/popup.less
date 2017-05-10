@@ -1,0 +1,158 @@
+@import 'common.less';
+
+/* popup */
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 180px;
+}
+
+body.with-condition-form {
+}
+
+.condition-form {
+  min-width: 360px;
+}
+
+.nav {
+  margin-bottom: 0;
+}
+
+li > a {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 20em;
+}
+
+.shortcut-help {
+  .monospace();
+  border: solid 1px #000;
+  border-radius: 2px;
+  display: inline-block;
+  color: #000;
+  box-shadow: 1px 1px;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  margin-top: -3px;
+}
+
+.nav-pills.nav-stacked {
+  > li > a {
+    padding: 5px 25px 5px 8px;
+    white-space: nowrap;
+    cursor: pointer;
+
+    .glyphicon {
+      margin-right: 6px;
+    }
+
+    &.profile-with-default-edit {
+      padding-right: 32px;
+      position: relative;
+      .dropdown-toggle {
+        margin: -5px 0;
+        color: inherit;
+        padding: 5px 8px 3px;
+        min-width: 20px;
+        position: absolute;
+        right: 0;
+
+        .glyphicon {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  > li.active .dropdown-toggle {
+    border-color: transparent !important;
+    border-left: solid 1px !important;
+    background: none !important;
+    border-radius: 0 !important;
+  }
+}
+
+.divider {
+  height: 1px;
+  overflow: hidden;
+  background-color: #E5E5E5;
+}
+
+.temp-rule a {
+  padding-left: 8px !important;
+  box-shadow: none !important;
+}
+
+li .dropdown-menu {
+  position: static;
+  top: initial;
+  top: -moz-initial;
+  margin: 0 5px !important;
+  float: none;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.current-domain {
+  color: #08C;
+}
+
+select, textarea, input {
+  margin-bottom: 0px !important;
+}
+
+form {
+  margin: 10px;
+}
+
+legend,
+.well {
+  margin-bottom: 10px;
+}
+
+.well {
+  padding: 10px;
+}
+
+.condition-controls, .proxy-not-controllable-controls {
+  .btn-primary {
+    float: right;
+  }
+}
+
+.external-profile {
+  a {
+    padding-right: 10px !important;
+  }
+
+  form {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+  }
+
+  .form-control {
+    display: inline-block;
+    padding: 0;
+    height: 2em;
+    width: ~"calc(100% - 1em - 8px)";
+  }
+}
+
+.proxy-not-controllable {
+  min-width: 400px;
+  padding: 10px 10px;
+
+  .proxy-not-controllable-controls {
+    margin-bottom: 0;
+  }
+}
+
+.request-info-details {
+  min-width: 360px;
+}

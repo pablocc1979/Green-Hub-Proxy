@@ -1,0 +1,12 @@
+.modal-header
+  button.close(type='button' ng-click='$dismiss()')
+    span(aria-hidden='true') ×
+    span.sr-only {{'dialog_close' | tr}}
+  h4.modal-title {{'options_modalHeader_resetRules' | tr}}
+.modal-body
+  p {{'options_resetRulesConfirm' | tr}}
+  .well
+    span(omega-profile-inline='ruleProfile' disp-name='dispNameFilter' options='options')
+.modal-footer
+  button.btn.btn-default(ng-click='$dismiss()') {{'dialog_cancel' | tr}}
+  button.btn.btn-warning(type='button' ng-click='$close("ok")') {{'options_resetRules' | tr}}

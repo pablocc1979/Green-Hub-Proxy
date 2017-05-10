@@ -1,0 +1,31 @@
+{
+	"name": "Proxy Switchy!",
+	"version": "1.7.0",
+	"description": "Manage and switch between multiple proxies quickly and easily.",
+	"icons": {
+		"128": "assets/images/icon-128.png",
+		"16": "assets/images/icon.png"
+	},
+	"default_locale": "en",
+	
+	"background_page": "main.html",
+	"options_page": "options.html",
+	
+	"permissions": [
+		"tabs",
+		"bookmarks",
+		"http://*/",
+		"https://*/"
+	],
+	"browser_action": {
+		"default_icon": "assets/images/icon-blue.png",
+		"default_title": "Proxy Switchy!",
+		"popup": "popup.html"
+	},
+	"plugins": [
+		{ "path": "plugins/npSwitchy.dll" },
+		{ "path": "plugins/npSwitchy.so" },
+		{ "path": "plugins/npSwitchy64.so" },
+		{ "path": "plugins/iSwitchy.bundle" }
+	]
+}

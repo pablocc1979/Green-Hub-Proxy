@@ -1,0 +1,39 @@
+.page-header
+  .profile-actions
+    button.btn(ng-show='exportRuleList' ng-click='exportRuleList(profile.name)'
+      title="{{'options_profileExportRuleListHelp' | tr}}"
+      ng-class="exportRuleListOptions.warning ? 'btn-warning' : 'btn-default'")
+      span.glyphicon.glyphicon-list
+      = ' '
+      | {{'options_profileExportRuleList' | tr}}
+    = ' '
+    button.btn.btn-default(ng-show='scriptable' ng-click='exportScript(profile.name)' title="{{'options_exportPacFileHelp' | tr}}")
+      span.glyphicon.glyphicon-download
+      = ' '
+      | {{'options_profileExportPac' | tr}}
+    = ' '
+    button.btn.btn-default(ng-click='renameProfile(profile.name)')
+      span.glyphicon.glyphicon-edit
+      = ' '
+      | {{'options_renameProfile' | tr}}
+    = ' '
+    button.btn.btn-danger(ng-click='deleteProfile(profile.name)')
+      span.glyphicon.glyphicon-trash
+      = ' '
+      | {{'options_deleteProfile' | tr}}
+  span.profile-color-editor
+    .profile-color-editor-fake(ng-if='profile.profileType == "VirtualProfile"'
+      ng-style="{'background-color': getProfileColor()}")
+    x-spectrum-colorpicker(ng-model='profile.color' options='spectrumOptions'
+      ng-if='profile.profileType != "VirtualProfile"')
+  h2.profile-name {{'options_profileTabPrefix' | tr}}{{profile.name}}
+section.settings-group(ng-show='profile.syncOptions == "disabled"')
+  p.alert.alert-info.width-limit(ng-show='!profile.syncError')
+    span.glyphicon.glyphicon-info-sign
+    = ' '
+    | {{'Syncing is disabled for this profile.'}}
+  p.alert.alert-danger.width-limit(ng-show='!!profile.syncError')
+    span.glyphicon.glyphicon-remove
+    = ' '
+    | {{('options_profileSyncDisabled_' + profile.syncError.reason) | tr}}
+div(ng-include='profileTemplate')

@@ -1,0 +1,577 @@
+<!--///////////////////////////////////////////////////////////////////////
+//                                                                       //
+//   Switchy! Chrome Proxy Manager and Switcher                          //
+//   Copyright (c) 2009 Mohammad Hejazi (mohammadhi at gmail d0t com)    //
+//   Dual licensed under the MIT and GPL licenses.                       //
+//                                                                       //
+////////////////////////////////////////////////////////////////////////-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Switchy! Options</title>
+	<link rel="shortcut icon" type="image/png" href="assets/images/icon.png"/> 
+	<link rel="stylesheet" href="assets/styles/options.css" type="text/css">
+	<link rel="stylesheet" href="assets/styles/infoTip.css" type="text/css">
+	<link rel="stylesheet" href="assets/styles/helpToolTip.css" type="text/css">
+	<script src="assets/libs/jquery-1.4.min.js" type="text/javascript"></script>
+	<script src="assets/libs/jquery.base64.js" type="text/javascript"></script>
+	<script src="assets/scripts/options.js" type="text/javascript"></script>
+	<script src="assets/scripts/infoTip.js" type="text/javascript"></script>
+	<script src="assets/scripts/helpToolTip.js" type="text/javascript"></script>
+</head>
+<body onload="init()" i18n-values=".style.direction:global_direction;.style.textAlign:global_textAlign">
+	<table id="optionsTable">
+		<tr>
+			<td>
+				<div id="header">
+					<table>
+						<tr>
+							<td width="100%">
+								<img src="assets/images/icon-128.png" width="50" height="50" class="title" />
+								<span class="title" i18n-content="options_headerTitle">Switchy! Options</span>
+							</td>
+							<td width="100">
+								<!--img src="assets/images/close.png" class="close" title="Close" onclick="closeWindow();" /-->
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+		<tr id="tabsRow">
+			<td>
+				<div id="tabsContainer">
+					<div id="tabProfiles" class="selected">
+						<img src="assets/images/profile.png" valign="bottom" width="16" height="16"> 
+						<span i18n-content="options_tabProxyProfiles">Proxy Profiles</span> 
+					</div>
+					<div id="tabRules" class="normal">
+						<img src="assets/images/filter.png" valign="bottom" width="16" height="16"> 
+						<span i18n-content="options_tabSwitchRules">Switch Rules</span> 
+					</div>
+					<div id="tabNetwork" class="normal">
+						<img src="assets/images/network.png" valign="bottom" width="16" height="16"> 
+						<span i18n-content="options_tabNetwork">Network</span> 
+					</div>
+					<div id="tabGeneral" class="normal">
+						<img src="assets/images/options.png" valign="bottom" width="16" height="16"> 
+						<span i18n-content="options_tabGeneral">General</span> 
+					</div>
+					<div id="tabImportExport" class="normal">
+						<img src="assets/images/save.png" valign="bottom" width="16" height="16"> 
+						<span i18n-content="options_tabImportExport">Import/Export</span> 
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr height="100%">
+			<td valign="top">				
+				<div id="body">
+					<div id="tabProfilesBody" class="tab">
+						<table id="proxyTable">
+							<tr>
+								<th><div i18n-content="options_proxyProfiles">Proxy Profiles</div></th>
+								<td></td>
+								<th><div i18n-content="options_profileDetails">Profile Details</div></th>
+							</tr>
+							<tr>
+								<td width="32%">
+									<table id="proxyProfiles">
+										<tr class="templateRow">
+											<td width="100%" i18n-content="options_untitledProfile">[Untitled Profile]</td>
+											<td width="28">
+												<div class="color" title="Profile Color" onclick="changeColor();" i18n-values="title:options_profileColor">
+													<div></div>
+												</div>
+											</td>
+											<td width="30">
+												<div class="delete" title="Delete Profile" onclick="deleteRow();" i18n-values="title:options_deleteProfile"></div>
+											</td>
+										</tr>
+									</table>
+									<button class="button" onclick="newRow();">
+										<img src="assets/images/add.png"> 
+										<span i18n-content="options_newProfile">New Profile</span>
+									</button>
+								</td>
+								<td width="13"></td>
+								<td>
+									<table id="profileDetails">
+										<tr class="indent">
+											<td><label><b i18n-content="options_profileName">Profile Name</b></label></td>
+											<td colspan="3"><input id="profileName" type="text"></td>
+										</tr>
+										<tr>
+											<td colspan="4"><hr /></td>
+										</tr>
+										<tr class="section">
+											<td colspan="4">
+												<label>
+													<input id="modeManual" type="radio" name="proxyMode">&nbsp;
+													<span><b i18n-content="options_manualConfig">Manual Configuration</b></span>
+												</label>
+											</td>
+										</tr>
+										<tr id="httpRow" class="indent">
+											<td><label i18n-content="options_httpProxy">HTTP Proxy</label></td>
+											<td><input id="httpProxyHost" type="text" class="ltr"></td>
+											<td><label i18n-content="options_proxyPort">Port</label></td>
+											<td><input id="httpProxyPort" type="text" class="ltr"></td>
+										</tr>
+										<tr id="sameProxyRow" class="indent">
+											<td></td>
+											<td colspan="3">
+												<label>
+													<input id="useSameProxy" type="checkbox">&nbsp;
+													<span i18n-content="options_useSameProxy">Use the same proxy server for all protocols</span>
+												</label>
+											</td>
+										</tr>
+										<tr id="httpsRow" class="indent">
+											<td><label i18n-content="options_httpsProxy">HTTPS Proxy</label></td>
+											<td><input id="httpsProxyHost" type="text" class="ltr"></td>
+											<td><label i18n-content="options_proxyPort">Port</label></td>
+											<td><input id="httpsProxyPort" type="text" class="ltr"></td>
+										</tr>
+										<tr id="ftpRow" class="indent">
+											<td><label i18n-content="options_ftpProxy">FTP Proxy</label></td>
+											<td><input id="ftpProxyHost" type="text" class="ltr"></td>
+											<td><label i18n-content="options_proxyPort">Port</label></td>
+											<td><input id="ftpProxyPort" type="text" class="ltr"></td>
+										</tr>
+										<tr id="socksRow" class="indent">
+											<td><label i18n-content="options_socksHost">SOCKS Host</label></td>
+											<td><input id="socksProxyHost" type="text" class="ltr"></td>
+											<td><label i18n-content="options_proxyPort">Port</label></td>
+											<td><input id="socksProxyPort" type="text" class="ltr"></td>
+										</tr>
+										<tr id="socksVersionRow" class="indent">
+											<td></td>
+											<td colspan="3">
+												<table>
+													<tr>
+														<td style="padding: 0px !important">
+															<label>
+																<input id="socksV4" type="radio" name="socksVersion">
+																<span i18n-content="options_socks4">SOCKS v4</span>
+															</label>
+														</td>
+														<td>&nbsp; &nbsp; &nbsp;</td>
+														<td>
+															<label>
+																<input id="socksV5" type="radio" name="socksVersion">
+																<span i18n-content="options_socks5">SOCKS v5</span>
+															</label>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr class="section">
+											<td colspan="4">
+												<label>
+													<input id="modeAuto" type="radio" name="proxyMode">&nbsp;
+													<span><b i18n-content="options_autoConfig">Automatic Configuration</b></span>
+												</label>
+											</td>
+										</tr>
+										<tr id="configUrlRow" class="indent">
+											<td><label i18n-content="options_autoConfigUrl">Auto Config URL</label></td>
+											<td colspan="3"><input id="proxyConfigUrl" type="text" class="ltr"></td>
+										</tr>
+										<!--tr class="section">
+											<td colspan="4">
+												<label>
+													<input id="modeAutoDetect" type="radio" name="proxyMode">&nbsp;
+													<span><b xi18n-content="options_autoConfig">Auto-detect Proxy Settings</b></span>
+												</label>
+											</td>
+										</tr-->
+										<tr>
+											<td colspan="4"><hr /></td>
+										</tr>
+										<tr class="indent">
+											<td>
+												<label><b i18n-content="options_noProxyFor">No Proxy for</b></label>
+												<span class="help">
+													<p i18n-content="options_noProxyFor_help">Use semicolons ( ; ) to seperate entries.</p>
+												</span>
+											</td>
+											<td colspan="3"><input id="proxyExceptions" type="text" class="ltr"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="tabRulesBody" class="tab">
+						<label>
+							<div class="title"><input id="chkSwitchRules" type="checkbox"> 
+								<span i18n-content="options_switchRulesEnable">Enable Switch Rules</span>
+								<span class="help" i18n-content="options_switchRulesEnable_help">
+									<p>Switch Rules specify which proxy should be used for each URL.</p><hr />
+									<p>When this option is enabled you'll see two more items in main menu:</p>
+									<table>
+										<tr>
+											<td><i>Auto Switch Mode</i></td>
+											<td>clicking this item will activate Switch Rules.</td>
+										</tr>
+										<tr>
+											<td><i>New Rule</i></td>
+											<td>quickly add a new Switch Rule for the current website.</td>
+										</tr>
+									</table>
+								</span>							
+							</div>
+						</label>
+						<div id="switchRules">
+						<table id="rulesTable" class="rulesTable">
+							<tr class="tableHeader">
+								<th width="18%" colName="name" i18n-content="options_ruleName">Rule Name</th>
+								<th width="45%" colName="urlPattern"><span i18n-content="options_urlPattern">URL Pattern</span>
+									<span class="help" i18n-content="options_urlPattern_help">
+										<p>Pattern of the page url.</p><hr />
+										<table>
+											<tr>
+												<td colspan="2"><b>Wildcard Reference</b></td>
+											</tr>
+											<tr>
+												<td><i>The asterisk (*) </i></td>
+												<td>matches zero or more characters.</td>
+											</tr>
+											<tr>
+												<td><i>The question mark (?) </i></td>
+												<td>matches exactly one character.</td>
+											</tr>
+											<tr>
+												<td colspan="2"><br /><b>Examples</b></td>
+											</tr>
+											<tr>
+												<td><i>*://www.google.com/* </i></td>
+												<td>Matches any URL that is on 'www.google.com' host and 
+												uses any scheme (http, https ...).</td>
+											</tr>
+											<tr>
+												<td><i>https://*.google.com/foo*bar </i></td>
+												<td>Matches any URL that is on a 'google.com' host and
+												uses the https scheme (such as 'www.google.com', 
+												'docs.google.com', or 'google.com'), as long as the path 
+												starts with '/foo' and ends with 'bar'.</td>
+											</tr>
+											<tr>
+												<td><i>http://example.org/foo/bar.html </i></td>
+												<td>Matches exactly the specified URL.</td>
+											</tr>
+										</table>
+									</span>
+								</th>
+								<th width="16%" colName="patternType"><span i18n-content="options_patternType">Pattern Type</span>
+									<span class="help" i18n-content="options_patternType_help">
+										<p>The type of URL Pattern.</p><hr />
+										<table>
+											<tr>
+												<td><i>Wildcard</i></td>
+												<td>for Wildcard matching.</td>
+											</tr>
+											<tr>
+												<td><i>RegExp</i></td>
+												<td>for Regular Expression matching.</td>
+											</tr>
+										</table>
+									</span>								
+								</th>
+								<th width="21%" colName="profileId"><span i18n-content="options_proxyProfile">Proxy Profile</span>
+									<span class="help">
+										<p i18n-content="options_proxyProfile_help">The proxy profile to be applied when this rule is matched.</p>
+									</span>								
+								</th>
+								<th width="28"></th>
+							</tr>
+							<tr class="templateRow">
+								<td><div title="Click to edit" i18n-values="title:options_clickToEdit"><span class="ruleName" i18n-content="options_newRule">New Rule</span>
+									<input name="name" type="text"></div></td>
+								<td class="ltr"><div title="Click to edit">	
+									<span class="urlPattern" class="ltr">&#x0b;&#x20;</span>
+									<input name="urlPattern" type="text">
+									<!--b class="tag">RegEx</b--></div></td>
+								<td><div>
+									<select name="patternType">
+										<option value="wildcard" i18n-content="options_patternTypeWildcard">Wildcard</option>
+										<option value="regexp" i18n-content="options_patternTypeRegExp">RegExp</option>
+									</select></div></td>
+								<td><div>
+									<select name="profileId"></select></div></td>
+								<td><div class="delete" title="Delete Rule" onclick="deleteRuleRow();" i18n-values="title:options_deleteRule"></div></td>
+							</tr>
+							<tr class="defaultRow">
+								<td><div>
+									<span class="ruleName" i18n-content="options_defaultRule">Default Rule</span>
+									<span class="help" i18n-content="options_defaultRule_help">
+										<p>This rule will be applied if no other rule is matched.</p>
+										<p><b>Note:</b> This rule can't be deleted.</p>
+									</span>
+								</div></td>
+								<td colspan="2"><div><span class="urlPattern" i18n-content="options_defaultRuleUrlPattern">All URLs that doesn't match any other pattern</span></div></td>
+								<!--td><div><span class="patternType">---</span></div></td-->
+								<td><div>
+									<select id="cmbDefaultRuleProfile" name="profileId"></select></div></td>
+								<td></div></td>
+							</tr>
+						</table>
+						<button class="button" id="btnNewRule" onclick="newRuleRow(undefined, true);">
+							<img src="assets/images/add.png"> 
+							<span i18n-content="options_newRule">New Rule</span>
+						</button>
+						<button class="button" id="btnDeleteAllRules" onclick="newRuleRow(undefined, true);">
+							<img src="assets/images/delete.png"> 
+							<span xi18n-content="options_deleteAllRules">Delete All</span>
+						</button>
+						
+						<hr />
+
+						<label>
+							<div class="title"><input id="chkRuleList" type="checkbox"> 
+								<span i18n-content="options_ruleList">Online Rule List</span>
+								<span class="help">
+									<p i18n-content="options_ruleList_help">Import predefined Switch Rules from online repository.</p>
+								</span>
+								&nbsp;
+								<a href="http://code.google.com/p/switchy/wiki/RuleList" class="link" target="_blank"
+									i18n-values=".style.float:global_float;">
+									<small><i>(<span i18n-content="options_moreInfo">More Info</span>)</i></small>
+								</a>
+							</div>
+						</label>
+						<table id="ruleListsTable" class="rulesTable">
+							<tr class="tableHeader">
+								<th width="61%"><span i18n-content="options_ruleListUrl">Rule List URL</span>
+									<span class="help">
+										<p i18n-content="options_ruleListUrl_help">The location of Rule List (you can't use local files).</p>
+									</span>
+								</th>
+								<th width="16%"><span i18n-content="options_reloadEvery">Reload Every</span>
+									<span class="help">
+										<p i18n-content="options_reloadEvery_help">Auto reload the Rule List every...</p>
+									</span>
+								</th>
+								<th width="23%"><span i18n-content="options_proxyProfile">Proxy Profile</span>
+									<span class="help">
+										<p i18n-content="options_ruleListProxyProfile_help">The proxy profile to be applied when any rule of this list is matched.</p>
+									</span>								
+								</th>
+							</tr>
+							<tr class="tableRow">
+								<td><input id="txtRuleListUrl" type="text" class="ltr"></td>
+								<td>
+									<select id="cmbRuleListReload">
+										<option value="15" i18n-content="options_15Minutes">15 &nbsp; Minutes</option>
+										<option value="30" i18n-content="options_30Minutes">30 &nbsp; Minutes</option>
+										<option value="45" i18n-content="options_45Minutes">45 &nbsp; Minutes</option>
+										<option value="60" i18n-content="options_1Hour">1 &nbsp;&nbsp;&nbsp; Hour</option>
+										<option value="180" i18n-content="options_3Hours">3 &nbsp;&nbsp;&nbsp; Hours</option>
+										<option value="360" i18n-content="options_6Hours">6 &nbsp;&nbsp;&nbsp; Hours</option>
+										<option value="720" i18n-content="options_12Hours">12 &nbsp; Hours</option>
+										<option value="1440" i18n-content="options_everyday">Everyday</option>
+									</select>
+								</td>
+								<td>
+									<select id="cmbRuleListProfile">
+										<option value="">Direct</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+						<label>
+							<div id="autoProxy"><input id="chkAutoProxy" type="checkbox"> 
+								<span i18n-content="options_autoProxyCompatible">AutoProxy Compatible List</span>
+								<span class="help">
+									<p i18n-content="options_autoProxyCompatible_help">Check this option if the url points to an 
+									AutoProxy rule list (like 'gfwlist').</p>
+								</span>							
+							</div>
+						</label>
+						</div>
+					</div>
+
+					<div id="tabNetworkBody" class="tab">
+						<label id="connectionsTitle">
+							<div class="title"><input id="chkConnections" type="checkbox"> 
+								<span i18n-content="options_vpnDialupProxy">Proxy for VPN/Dial-up</span>
+								<span class="help">
+									<p i18n-content="options_vpnDialupProxy_help">Also set proxy for this VPN/Dial-up connection.</p>
+								</span>
+								<small i18n-values=".style.float:global_float;"><i>(<span i18n-content="options_windowsOnly">Windows only</span>)</i></small>
+							</div>
+						</label>
+						<table id="connectionsTable">
+							<tr class="option">
+								<td><label i18n-content="options_connection">Connection</label></td>
+								<td>
+									<select id="cmbConnection">
+										<option value="">Test Connection</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+						<hr />
+						<label>
+							<div class="title"><input id="chkMonitorProxyChanges" type="checkbox"> 
+								<span i18n-content="options_monitorProxyChanges">Monitor Proxy Changes</span>
+								<span class="help">
+									<p i18n-content="options_monitorProxyChanges_help">Repeatedly check for changes in proxy settings done by other applications, 
+									and update Switchy icon to reflect those changes.</p>
+								</span>														
+							</div>
+						</label>
+						<label>
+							<div class="indent"><input id="chkPreventProxyChanges" type="checkbox"> 
+								<span i18n-content="options_revertProxyChanges">Revert proxy changes done by other apps.</span>
+								<span class="help">
+									<p i18n-content="options_revertProxyChanges_help">Revert any change in proxy settings done by other applications.</p>
+								</span>														
+							</div>
+						</label>
+					</div>
+
+					<div id="tabImportExportBody" class="tab">
+						<div class="title" i18n-content="options_switchRules">Switch Rules</div>
+						<table id="exportRulesTable" class="optionGroup">
+							<tr class="section">
+								<td>
+									<button class="button" onclick="exportRuleList();" i18n-content="options_exportRuleList">Export Rule List</button>
+								</td>
+								<td i18n-content="options_exportRuleList_help">
+									Export Switch Rules as a Switchy! Rule List file, so you can share it with friends.
+								</td>
+							</tr>
+							<tr class="section">
+								<td>
+									<button class="button" onclick="exportPacFile();" i18n-content="options_exportPacFile">Export PAC File</button>
+								</td>
+								<td i18n-content="options_exportPacFile_help">
+									Export Switch Rules as a PAC file, so you can use it in other browsers.
+								</td>
+							</tr>
+						</table>
+						<hr />
+						<div class="title" i18n-content="options_headerTitle">Switchy! Options</div>
+						<table id="exportRulesTable" class="optionGroup">
+							<tr class="section">
+								<td>
+									<button class="button" onclick="makeBackup();" i18n-content="options_makeBackup">Make Backup</button>
+								</td>
+								<td i18n-content="options_makeBackup_help">
+									Make a full backup of your Switchy! options (including proxies, rules and all other options).
+								</td>
+							</tr>
+							<tr class="section">
+								<td>
+									<button class="button" onclick="restoreBackup();" i18n-content="options_restoreBackup">Restore Backup</button>
+								</td>
+								<td>
+									<input type="text" id="txtBackupFilePath" class="initial ltr" 
+										value="Backup file full path (e.g. 'c:\switchy.bak', 'http://example.com/switchy.bak')" i18n-values="value:options_restoreBackup_help">
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="tabGeneralBody" class="tab">
+						<label>
+							<div class="title"><input id="chkQuickSwitch" type="checkbox"> 
+								<span i18n-content="options_quickSwitch">Quick Switch</span>
+								<span class="help" i18n-content="options_quickSwitch_help">
+									<p>Allows you to switch between two proxy profiles in one click 
+									(by clicking on Switchy icon).</p><hr />
+									<p><b>Note:</b> After enabling this feature you won't be able to see Switchy
+									main menu when clicking on Switchy icon, and so to open this Options page again 
+									you should go to Chrome Extensions page (Chrome Menu > Extensions).</p>
+								</span>
+							</div>
+						</label>
+						<table id="quickSwitchTable">
+							<tr class="section">
+								<td colspan="2">
+									<label>
+										<input id="rdoBinarySwitch" type="radio" name="quickSwitchType" checked="checked">
+										<span><b i18n-content="options_binarySwitch">Binary Switch</b></span>
+									</label>
+								</td>
+							</tr>
+							<tr class="option indent">
+								<td><label i18n-content="options_profile1">Profile 1</label></td>
+								<td>
+									<select id="cmbProfile1">
+										<option value="">Direct</option>
+									</select>
+								</td>
+							</tr>
+							<tr class="option indent">
+								<td><label i18n-content="options_profile2">Profile 2</label></td>
+								<td>
+									<select id="cmbProfile2">
+										<option value="">Direct</option>
+									</select>
+								</td>
+							</tr>
+							<tr class="section">
+								<td colspan="2">
+									<label>
+										<input id="rdoCycleSwitch" type="radio" name="quickSwitchType">
+										<span><b i18n-content="options_cycleAllProxies">Cycle All Proxies</b></span>
+									</label>
+								</td>
+							</tr>
+						</table>
+						<hr />
+						<div class="title" i18n-content="options_miscOptions">Misc Options</div>
+						<label>
+							<div class="indent"><input id="chkReapplySelectedProfile" type="checkbox"> 
+								<span i18n-content="options_reapplyLastProfile">Auto apply last selected proxy profile on startup.</span>
+								<span class="help">
+									<p i18n-content="options_reapplyLastProfile_help">If this option is checked Switchy will apply last user-selected 
+									proxy profile on Chrome startup.</p>
+								</span>														
+							</div>
+						</label>
+						<label>
+							<div class="indent"><input id="chkConfirmDeletion" type="checkbox"> 
+								<span i18n-content="options_confirmDeletion">Confirm profile/rule deletion.</span>
+								<span class="help">
+									<p i18n-content="options_confirmDeletion_help">Show a confirmation dialog for deletion of proxy 
+									profiles or switch rules.</p>
+								</span>														
+							</div>
+						</label>
+					</div>
+					
+					<div class="control">
+						<hr />
+						<table>
+							<tr>
+								<td width="100%">
+									<button class="button" id="btnErrorLog" onclick="showLog();" i18n-content="options_errorLog">Error Log</button>
+								</td>
+								<td>
+									<button class="button bold" id="btnSave" onclick="saveOptions();" i18n-content="options_save">Save</button>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<button class="button" id="btnClose" onclick="closeWindow();" i18n-content="options_close">Close</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<div id="tip" class="tip">
+		<br />
+		<b>Tip:</b>
+		<span class="text">To make Switchy! work with dial-up/VPN connections, see 'Network' tab.</span>
+	</div>
+</body>
+</html>

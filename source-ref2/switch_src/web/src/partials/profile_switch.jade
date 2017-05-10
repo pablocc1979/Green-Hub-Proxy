@@ -1,0 +1,182 @@
+div(ng-controller='SwitchProfileCtrl')
+  section.condition-help-section.settings-group(ng-show='conditionHelp.show' ng-init='expandedSection = {id: 0}')
+    h3
+      | {{'options_group_conditionHelp' | tr}}
+      button.close.close-condition-help(type='button' ng-click='conditionHelp.show = false')
+        span(aria-hidden='true') ×
+        span.sr-only {{'dialog_close' | tr}}
+    div.condition-help(ng-repeat='group in (showConditionTypes == 0 ? basicConditionTypes : advancedConditionTypes)')
+      h4(ng-show="!!('condition_group_' + group.group | tr)")
+        a(ng-click='expandedSection.id = $index' role='button')
+          span.glyphicon(ng-class="{'glyphicon-chevron-down': expandedSection.id == $index, 'glyphicon-chevron-right': expandedSection.id != $index}")
+          = ' '
+          | {{'condition_group_' + group.group | tr}}
+      dl(ng-show='expandedSection.id == $index')
+        dt(ng-repeat-start='type in group.types') {{'condition_' + type | tr}}
+        dd(ng-repeat-end)
+          div(ng-bind-html='"condition_help_" + type | tr')
+          .text-danger(ng-if='isUrlConditionType[type]')
+            span.glyphicon.glyphicon-alert
+            = ' '
+            span(ng-bind-html='"condition_alert_fullUrlLimitation" | tr')
+  section.settings-group
+    h3
+      | {{'options_group_switchRules' | tr}}
+      = ' '
+      button.btn(ng-click='toggleSource()' ng-class='editSource ? "btn-primary active" : "btn-default"')
+        span.glyphicon.glyphicon-edit
+        = ' '
+        | {{'options_profileEditSource' | tr}}
+      = ' '
+      a.btn.btn-link.btn-sm.clear-padding.toggle-condition-help(
+        ng-show='editSource' target='_blank' 
+        title='{{"options_profileEditSourceHelp" | tr}}'
+        href='{{"options_profileEditSourceHelpUrl" | tr}}')
+        span.glyphicon.glyphicon-question-sign
+    .alert.alert-danger.width-limit(ng-show='source.error')
+      span.glyphicon.glyphicon-remove
+      = ' '
+      | {{source.error.message}}
+    .alert.alert-danger(ng-show='!!hasUrlConditions')
+      span.glyphicon.glyphicon-alert
+      = ' '
+      span(ng-bind-html='"condition_alert_fullUrlLimitation" | tr')
+    .rules-source(ng-show='editSource')
+      textarea.monospace.form-control.width-limit(ng-model='source.code' rows=20 ng-change='source.touched = true; $root.optionsDirty = true')
+    .table-responsive.switch-rules-wrapper(ng-if='loadRules' ng-show='!editSource')
+      table.switch-rules.table.table-bordered.table-condensed.width-limit-xl
+        thead
+          tr
+            th(style='white-space: nowrap') {{'options_sort' | tr}}
+            th.condition-type-th
+              | {{'options_conditionType' | tr}}
+              = ' '
+              button.btn.btn-link.btn-sm.clear-padding.toggle-condition-help(
+                title='{{"options_showConditionTypeHelp" | tr}}'
+                ng-click='conditionHelp.show = !conditionHelp.show')
+                span.glyphicon.glyphicon-question-sign
+            th {{'options_conditionDetails' | tr}}
+            th {{'options_resultProfile' | tr}}
+            th {{'options_conditionActions' | tr}}
+        tbody(ui-sortable='sortableOptions' ng-model='profile.rules')
+          tr.switch-rule-row(ng-repeat='rule in profile.rules')
+            td.sort-bar
+              span.glyphicon.glyphicon-sort
+            td(ng-class='{"has-icon": isUrlConditionType[rule.condition.conditionType]}')
+              select.form-control(ng-model='rule.condition.conditionType'
+                ng-options='type.type as ("condition_" + type.type | tr) group by (type.group | tr) for type in conditionTypes')
+              span.glyphicon.glyphicon-alert.text-danger(ng-if='isUrlConditionType[rule.condition.conditionType]')
+            td(ng-switch='rule.condition.conditionType' ng-class='{"has-warning": conditionHasWarning(rule.condition)}')
+              span(ng-switch-when='FalseCondition')
+                span(ng-show='!!rule.condition.pattern')
+                  input.form-control(ng-model='rule.condition.pattern' disabled title="{{'condition_details_FalseCondition' | tr}}")
+                span(ng-show='!rule.condition.pattern') {{'condition_details_FalseCondition' | tr}}
+              span.host-levels-details(ng-switch-when='HostLevelsCondition')
+                input.form-control(type='number' min='1' max='99' ng-model='rule.condition.minValue' required)
+                = ' '
+                span {{'options_hostLevelsBetween' | tr}}
+                = ' '
+                input.form-control(type='number' max='99' min='1' ng-model='rule.condition.maxValue' required)
+              span(ng-switch-when='IpCondition')
+                input.form-control(type='text' ng-model='rule.condition' required
+                  omega-ip2str placeholder='127.0.0.1/8'
+                  ui-validate='{pattern: "validateIpCondition(rule.condition, $value)"}')
+              span.host-levels-details(ng-switch-when='TimeCondition')
+                input.form-control(type='number' min='0' max='23' ng-model='rule.condition.startHour' required)
+                = ' '
+                span {{'options_hourBetween' | tr}}
+                = ' '
+                input.form-control(type='number' min='0' max='23'
+                  ng-model='rule.condition.endHour' required)
+              span.host-levels-details(ng-switch-when='WeekdayCondition')
+                label.checkbox-inline(ng-repeat='selected in getWeekdayList(rule.condition) track by $index')
+                  input(type='checkbox' ng-model='selected' ng-change='updateDay(rule.condition, $index, selected)')
+                  = '{{"options_weekDayShort_" + $index | tr}} '
+              input.form-control(ng-model='rule.condition.pattern' ng-switch-default required
+                ui-validate='{pattern: "validateCondition(rule.condition, $value)"}')
+            td.switch-rule-row-target
+              div(omega-profile-select='options | profiles:profile' ng-model='rule.profileName'
+                disp-name='dispNameFilter' options='options'
+                ng-class='{disabled: rule.condition.conditionType == "NeverCondition"}')
+            td
+              button.btn.btn-danger.btn-sm(title="{{'options_deleteRule' | tr}}" ng-click='removeRule($index)')
+                span.glyphicon.glyphicon-trash
+              = ' '
+              button.btn.btn-default.btn-sm(title="{{'options_cloneRule' | tr}}" ng-click='cloneRule($index)')
+                span.glyphicon.glyphicon-duplicate
+        tbody
+          tr
+            td(style='border-right: none;')
+            td(style='border-left: none;', colspan='4')
+              button.btn.btn-default.btn-sm(ng-click='addRule()')
+                span.glyphicon.glyphicon-plus
+                = ' '
+                span {{'options_addCondition' | tr}}
+        tbody.switch-attached(ng-if='attached')
+          tr
+            td(style='border-right: none;')
+              span.glyphicon(class='{{profileIcons["RuleListProfile"]}}')
+            td(style='border-left: none;')
+              span.checkbox
+                label
+                  input(type='checkbox' ng-model='attachedOptions.enabled')
+                  | {{'options_switchAttachedProfileInCondition' | tr}}
+            td
+              span(ng-show='!!attachedOptions.enabled')
+                | {{'options_switchAttachedProfileInConditionDetails' | tr}}
+              span(ng-show='!attachedOptions.enabled')
+                | {{'options_switchAttachedProfileInConditionDisabled' | tr}}
+            td
+              div(omega-profile-select='options | profiles:profile' ng-model='attached.matchProfileName'
+                disp-name='dispNameFilter' options='options' ng-class='{disabled: !attachedOptions.enabled}')
+            td
+              button.btn.btn-danger.btn-sm(title="{{'options_deleteAttached' | tr}}" ng-click='removeAttached()')
+                span.glyphicon.glyphicon-trash
+        tbody
+          tr.switch-default-row
+            td
+            td(colspan='2') {{'options_switchDefaultProfile' | tr}}
+            td
+              div(omega-profile-select='options | profiles:profile' ng-model='attachedOptions.defaultProfileName'
+                disp-name='dispNameFilter' options='options')
+            td
+              button.btn.btn-info.btn-sm(title="{{'options_resetRules_help' | tr}}" ng-click='resetRules()')
+                span.glyphicon.glyphicon-chevron-up
+  section.settings-group(ng-if='!attached')
+    h3 {{'options_group_attachProfile' | tr}}
+    p.help-block {{'options_attachProfileHelp' | tr}}
+    button.btn.btn-default(ng-click='attachNew()')
+      span.glyphicon.glyphicon-plus
+      = ' '
+      | {{'options_attachProfile' | tr}}
+  section.settings-group(ng-if='attached')
+    h3 {{'options_group_ruleListConfig' | tr}}
+    form
+      .form-group
+        label {{'options_ruleListFormat' | tr}}
+        .radio.inline-form-control.no-min-width(ng-repeat='format in ruleListFormats')
+          label
+            input(type='radio' name='formatInput' value='{{format}}' ng-model='attached.format')
+            | {{'ruleListFormat_' + format | tr}}
+      .form-group
+        label {{'options_group_ruleListUrl' | tr}}
+        .width-limit.inline-form-control(input-group-clear type='url' model='attached.sourceUrl'
+          style='vertical-align: middle')
+      p.help-block {{'options_ruleListUrlHelp' | tr}}
+    p
+      button.btn.btn-default(ng-disabled='!attached.sourceUrl' ng-click='updateProfile(attached.name)'
+          ladda='updatingProfile[attached.name]' data-spinner-color="#000000"
+          ng-class='attached.sourceUrl && !attached.lastUpdate ? "btn-primary" : "btn-default"')
+        | #[span.glyphicon.glyphicon-download-alt] {{'options_downloadProfileNow' | tr}}
+  section.settings-group(ng-if='attached')
+    h3 {{'options_group_ruleListText' | tr}}
+    p.alert.alert-success.width-limit(ng-show='attached.sourceUrl && attached.lastUpdate')
+      | {{'options_ruleListLastUpdate' | tr:[(attached.lastUpdate | date:'medium')]}}
+    p.alert.alert-danger.width-limit(ng-show='attached.sourceUrl && !attached.lastUpdate')
+      | {{'options_ruleListObsolete' | tr}}
+    p.alert.alert-danger.width-limit(ng-show='attachedRuleListError')
+      span.glyphicon.glyphicon-remove
+      = ' '
+      | {{attachedRuleListError.message}}
+    textarea#attached-rulelist.monospace.form-control.width-limit(rows=20
+      ng-model='attached.ruleList' ng-disabled='!!attached.sourceUrl')

@@ -1,0 +1,124 @@
+{
+  "name": "switchyomega",
+  "version": "0.0.1",
+  "authors": [
+    "FelisCatus <felis.catus@example.com>"
+  ],
+  "description": "The ultimate proxy switcher.",
+  "keywords": [
+    "proxy",
+    "pac",
+    "extension"
+  ],
+  "license": "GPL",
+  "homepage": "https://github.com/FelisCatus/SwitchyOmega",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "angular-bootstrap": "~0.12.0",
+    "angular-animate": "~1.2.16",
+    "angular-ui-router": "~0.2.10",
+    "angular-loader": "~1.2.16",
+    "angular-i18n": "~1.2.16",
+    "bootstrap": "~3.3.2",
+    "script.js": "~2.5.3",
+    "ngprogress": "~1.0.4",
+    "angular-ui-sortable": "~0.13.3",
+    "jsondiffpatch": "~0.1.7",
+    "angular-spectrum-colorpicker": "~1.3.5",
+    "blob": "*",
+    "FileSaver": "*",
+    "angular-ui-utils": "bower-validate",
+    "angular-ladda": "~0.2.1",
+    "angular-sanitize": "~1.2.26",
+    "shepherd.js": "~0.5.1"
+  },
+  "exportsOverride": {
+    "script.js": {
+      "": "dist/*.min.js"
+    },
+    "jquery": {
+      "": "dist/jquery.min.js"
+    },
+    "jquery-ui": {
+      "": []
+    },
+    "angular": {
+      "": "*.min.js"
+    },
+    "angular-animate": {
+      "": "*.min.*"
+    },
+    "angular-bootstrap": {
+      "": "ui-bootstrap-tpls.min.js"
+    },
+    "angular-i18n": {
+      "": [
+        "angular-locale_en-us.js",
+        "angular-locale_zh-cn.js",
+        "angular-locale_zh-hk.js",
+        "angular-locale_zh-tw.js"
+      ]
+    },
+    "angular-loader": {
+      "": "*.min.js"
+    },
+    "angular-sanitize": {
+      "": "*.min.js"
+    },
+    "angular-spectrum-colorpicker": {
+      "": "dist/*.min.js"
+    },
+    "angular-ui-router": {
+      "": "release/*.js"
+    },
+    "angular-ui-sortable": {
+      "": "*.js"
+    },
+    "angular-ui-utils": {
+      "": "*.js"
+    },
+    "bootstrap": {
+      "css": "dist/css/*.min.*",
+      "fonts": "dist/fonts/*",
+      "js": "js/dropdown.*"
+    },
+    "ngprogress": {
+      "": "build/*.min.js"
+    },
+    "jsondiffpatch": {
+      "": "public/build/jsondiffpatch.min.js"
+    },
+    "shepherd.js": {
+      "": [
+        "*.min.js",
+        "css/*.css"
+      ]
+    },
+    "spectrum": {
+      "": [
+        "*.js",
+        "*.css"
+      ]
+    },
+    "FileSaver": {
+      "": "*.js"
+    },
+    "blob": {
+      "": "*.js"
+    },
+    "ladda": {
+      "": [
+        "dist/ladda-themeless.min.css",
+        "dist/ladda.min.js"
+      ]
+    }
+  }
+}

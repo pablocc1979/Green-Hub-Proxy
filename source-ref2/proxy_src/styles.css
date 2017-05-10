@@ -1,0 +1,347 @@
+  @import url("chrome_shared.css");
+  @import url("list.css");
+
+  #logo {
+    position: absolute;
+    left: 0;
+  }
+  body {
+    font-family: 'Lucida Grande', sans-serif;
+    font-size: 75%;
+    -webkit-margin-start: 155px;
+  }
+  label {
+    vertical-align:top;
+    display:inline-block;
+    width:225px;
+    text-align:left;
+    color: #303942;
+  }
+  div.content {
+    position:relative;
+    -webkit-padding-start: 18px;
+    padding-top: 45px;
+    padding-left: 0px;
+    min-width: 738px;
+  }
+  div.checkbox {
+    margin: .65em 0;
+  }
+  header {
+    top: 0;
+    position: fixed;
+    color: #303942;
+    margin-top:0;
+    margin-left:0px;
+    max-width: 1024px;
+    min-width: 630px;
+    left: 155px;
+    background: -webkit-linear-gradient(top, white, white 40%,
+      rgba(255, 255, 255, 0.92));
+    z-index: 3;
+  }
+  header h1::after {
+    background-color: #eee;
+    content: ' ';
+    display: block;
+    height: 1px;
+    position: relative;
+    top: 13px;
+  }
+
+  section {
+    -webkit-padding-start: 18px;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    display: block;
+    max-width: 610px;
+  }
+  section:last-of-type {
+    margin-bottom: 0px;
+  }
+  h1 {
+    padding-top: 5px;
+  }
+  section > h3 {
+    margin-left:-18px;
+  }
+  span.info {
+    color:#333;
+    font-size:small;
+    display:block;
+    padding:15px;
+  }
+  .button {
+    padding:1px 5px;
+    border-radius:2px;
+    background:#caa;
+    border:1px solid #ccc;
+  }
+  .button:hover {
+    border:1px inset #a99;
+    cursor:hand;
+  }
+  #srulem,#mrules {
+    display:inline-block;
+    position:absolute;
+    left:37px;
+  }
+  #mrule {
+    display:none;
+  }
+
+
+  .rules > span {
+    float:left;
+    clear:left;
+    margin-left:50px;
+    min-height:25px;
+  }
+  .rules > span > span {
+    position:absolute;
+    left:200px;
+    display:inline-block;
+    margin-top:-2px;
+  }
+  .nl {
+    clear: both;
+  }
+  
+  .list-tooltip {
+    line-height: 30px;
+    color: #888;
+    text-align: right;
+    padding-right: 15px;
+  }
+
+  /* list */
+  list {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+
+  list .empty {
+    background-color: #f4f4f4;
+    box-sizing: border-box;
+    min-height: 125px;
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+
+  list > * {
+    -webkit-box-align: center;
+    -webkit-transition: 150ms background-color;
+    border: none;
+    border-radius: 0;  /* TODO(dbeam): Is this necessary? */
+    box-sizing: border-box;
+    display: -webkit-box;
+    height: 32px;
+    margin: 0;
+  }
+
+  list > .spacer {
+    /* The above height rule should not apply to spacers. When redraw is called
+       on the list they will be given an explicit element height but this ensures
+       they have 0 height to begin with. */
+    height: 0;
+  }
+
+  list:not([disabled]) > :hover {
+    background-color: rgb(228, 236, 247);
+  }
+
+  list:not([hasElementFocus]) > [selected],
+  list:not([hasElementFocus]) > [lead][selected] {
+    background-color: #d0d0d0;
+    background-image: none;
+  }
+
+  list[hasElementFocus] > [selected],
+  list[hasElementFocus] > [lead][selected],
+  list:not([hasElementFocus]) > [selected]:hover,
+  list:not([hasElementFocus]) > [selected][lead]:hover {
+    background-color: rgb(187, 206, 233);
+    background-image: none;
+  }
+
+  list[hasElementFocus] > [lead],
+  list[hasElementFocus] > [lead][selected] {
+    border-bottom: 1px solid rgb(120, 146, 180);
+    border-top: 1px solid rgb(120, 146, 180);
+  }
+
+  list[hasElementFocus] > [lead]:nth-child(2),
+  list[hasElementFocus] > [lead][selected]:nth-child(2) {
+    border-top: 1px solid transparent;
+  }
+
+  list[hasElementFocus] > [lead]:nth-last-child(2),
+  list[hasElementFocus] > [lead][selected]:nth-last-child(2) {
+    border-bottom: 1px solid transparent;
+  }
+
+  list[disabled] > [lead][selected],
+  list[disabled]:focus > [lead][selected] {
+    border: none;
+  }
+
+  list[disabled] {
+    opacity: 0.6;
+  }
+
+  list > .heading {
+    color: #666;
+  }
+
+  list > .heading:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  list .deletable-item {
+    -webkit-box-align: center;
+  }
+
+  list .deletable-item > :first-child {
+    -webkit-box-align: center;
+    -webkit-box-flex: 1;
+    -webkit-padding-end: 5px;
+    display: -webkit-box;
+  }
+
+  list .row-delete-button {
+    -webkit-transition: 150ms opacity;
+    background-color: transparent;
+    /* TODO(stuartmorgan): Replace with real images once they are available. */
+    background-image: -webkit-image-set(
+      url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAiElEQVR42r2RsQrDMAxEBRdl8SDcX8lQPGg1GBI6lvz/h7QyRRXV0qUULwfvwZ1tenw5PxToRPWMC52eA9+WDnlh3HFQ/xBQl86NFYJqeGflkiogrOvVlIFhqURFVho3x1moGAa3deMs+LS30CAhBN5nNxeT5hbJ1zwmji2k+aF6NENIPf/hs54f0sZFUVAMigAAAABJRU5ErkJggg==") 1x);
+    border: none;
+    display: block;
+    height: 16px;
+    opacity: 1;
+    width: 16px;
+    margin-right: 10px;
+  }
+
+  list > *:not(:hover):not([selected]):not([lead]) .row-delete-button,
+  list:not([hasElementFocus]) > *:not(:hover):not([selected]) .row-delete-button,
+  list[disabled] .row-delete-button,
+  list .row-delete-button[disabled] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  list div[role='listitem'][managedby='HostedApp'] .row-delete-button {
+    opacity: 1;
+  }
+
+  list .row-delete-button:hover {
+    background-image: -webkit-image-set(
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAqklEQVR4XqWRMQ6DMAxF/1Fyilyj2SmIBUG5QcTCyJA5Z8jGhlBPgRi4TmoDraVmKFJlWYrlp/g5QfwRlwEVNWVa4WzfH9jK6kCkEkBjwxOhLghheMWMELUAqqwQ4OCbnE4LJnhr5IYdqQt4DJQjhe9u4vBBmnxHHNzRFkDGjHDo0VuTAqy2vAG4NkvXXDHxbGsIGlj3e835VFNtdugma/Jk0eXq0lP//5svi4PtO01oFfYAAAAASUVORK5CYII=")
+            1x,
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAB4UlEQVR42u2VsWoCQRBAh+MUFP0C1V9QD4NEOxs9xBQHQVCwSJFWVBAtBNXCxk6wTkBJYUTwEwQLC61E8QP0NzZzt5g5726DkC7EYWHZ8T3WndkV2C/jLwn4hwVYBIdLn9vkLp79QcBCTDMiy3w2gQ9XeTYkEHA8vqj2rworXu3HF1YFfSWgp5QFnKVLvYvzDEKEZ5hW70oXOCtcEbQLIkx7+IQtfMBSOjU6XEF4oyOdYInZbXyOuajjDlpNeQgleIUJKUz4BDMledhqOu/AzVSmzZ49CUjCC0yvim98iqtJT2L2jKsqczsdok9XrHNexaww415lnTNwn6CM/KxJIR8bnUZHPhLO6yMoIyk2pNjLewFuE5AiY1KMMQx8Q7hQYFek4AkjxXFe1rsF84I/BTFQMGL+1Lxwl4DwdtM1gjwKohgxyLtG7SYpxALqugOMcfOKN+bFXeBsLB1uulNcRqq7/tt36k41zoL6QlxGjtd6lrahiqCi1iOFYyvXuxY8yzK33VnvUivbLlOlj/jktm0s3YnXrNIXXufHNxuOGasi8S68zkwrlnV8ZcJJsTIUxbLgQcFZWE8N0gau2p40VVcM0gYeFpSRK6445UhBuKiRgiyKw+34rLt59nb1/7+RwReVkaFtqvNBuwAAAABJRU5ErkJggg==")
+            2x);
+  }
+
+  list .row-delete-button:active {
+    background-image: -webkit-image-set(
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAARElEQVQoz2P4z4AfMlBLAYMdwxkghgEwD1XBGTC0g0sDIaYJECVwFqoChBK4WegKkJWArSJZAQErCDqSKG/iCyhaRhYA9LDIbULDzlIAAAAASUVORK5CYII=")
+            1x,
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAA/ElEQVR4Xu3UsWrCUBiG4efGlIBoIMFbcnYolYJ3pg4iKGrGYFTRwaUFhYAekiDt0EG++X2W83N8/3J/DbwBMJJSsdQItcDY1VlCOImzq3Ed8OmicHASB3ns5KBw8VUNpDJrW7uAiJ3sbK1l0mqArpmFTUlQ5jYWZrrUAUSmT0SZm4qoA56JvVhs/5g3A7RLolA85A1ASOTye65NMxASK6syfxGITMzvMxG9CvRkliWwlOm9AsSOcitzU1NzK7mjuBkQvHtLK7iLBiB5PhttJSGpB8I8vM6kDuiHeUjoVwMfYR4SRtUAw1veIZzOjRhSBzCoyKFjgH/3K7+BHzg+Cgw0eSW3AAAAAElFTkSuQmCC")
+            2x);
+  }
+
+  list .static-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  list[inlineeditable] input {
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+  }
+
+  list > :not([editing]) [displaymode='edit'] {
+    display: none;
+  }
+
+  list > [editing] [displaymode='static'] {
+    display: none;
+  }
+
+  list > [editing] input:invalid {
+    /* TODO(stuartmorgan): Replace with validity badge */
+    background-color: pink;
+  }
+	
+	#usageContainer {
+		width: 100%;
+		border: 1px solid #eee;
+		position: relative;
+		z-index: 2;
+		height: 30px;
+		overflow:hidden;
+		background-image: -webkit-linear-gradient(left bottom, #ddd 0%, #ddd 25%, #9be 25%, #9be 50%, #ddd 50%, #ddd 75%, #9be 75%);
+		background-image: linear-gradient(left bottom, #ddd 0%, #ddd 25%, #9be 25%, #9be 50%, #ddd 50%, #ddd 75%, #9be 75%);
+		background-size: 30px 30px;
+	}
+	#usageContainer > div {
+		padding: 0;
+		margin: 0;
+		height: 30px;
+		font-size: 1.2em;
+		line-height: 2em;
+		text-indent: 5px;
+		text-shadow: 0px 3px 3px #eee,
+								 3px 0px 3px #eee,
+								 -3px 0px 3px #eee,
+								 0px -3px 3px #eee;
+	}
+	#localUsage, #remoteUsage, #unknownUsage {
+		z-index: 2;
+		float:left;
+		width:0%;
+		overflow: hidden;
+		background-size: 30px 30px;
+	}
+	#localUsage {
+		background-image: -webkit-linear-gradient(left bottom, #ddd 0%, #ddd 25%, #daf 25%, #daf 50%, #ddd 50%, #ddd 75%, #daf 75%);
+		background-image: linear-gradient(left bottom, #ddd 0%, #ddd 25%, #daf 25%, #daf 50%, #ddd 50%, #ddd 75%, #daf 75%);
+	}
+	#remoteUsage {
+		background-image: -webkit-linear-gradient(left bottom, #ddd 0%, #ddd 25%, #9eb 25%, #9eb 50%, #ddd 50%, #ddd 75%, #9eb 75%);
+		background-image: linear-gradient(left bottom, #ddd 0%, #ddd 25%, #9eb 25%, #9eb 50%, #ddd 50%, #ddd 75%, #9eb 75%);
+	}
+	#unknownUsage {
+		width: 100%;
+		background-image: -webkit-linear-gradient(left bottom, #ddd 0%, #ddd 25%, #bbb 25%, #bbb 50%, #ddd 50%, #ddd 75%, #bbb 75%);
+		background-image: linear-gradient(left bottom, #ddd 0%, #ddd 25%, #bbb 25%, #bbb 50%, #ddd 50%, #ddd 75%, #bbb 75%);
+	}
+	div#unproxiedUsage {
+		width: 100%;
+		top: 0;
+		left: 0;
+		text-align: right;
+	}
+	#usage label {
+		color: #888;
+	}
+  
+  textarea {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    min-height: 100px;
+    max-height: 350px;
+    overflow-y: scroll;
+    width: 610px;
+    padding: 10px;
+    resize: none;
+  }
+  
+  #domainrules label {
+    width: 100%;
+  }

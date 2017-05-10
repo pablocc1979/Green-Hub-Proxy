@@ -1,0 +1,61 @@
+/*/////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//   Switchy! Chrome Proxy Manager and Switcher                          //
+//   Copyright (c) 2009 Mohammad Hejazi (mohammadhi at gmail d0t com)    //
+//   Dual licensed under the MIT and GPL licenses.                       //
+//                                                                       //
+/////////////////////////////////////////////////////////////////////////*/
+
+.help {
+	display: inline-block;
+	width: 14px;
+	margin: -2px 0;
+	height: 14px;
+	background: url("../images/help.png") center bottom no-repeat;
+	opacity: 0.33;
+	cursor: help;
+}
+
+.help:hover {
+	opacity: 1;
+}
+
+.help * {
+	display: none;
+}
+
+#helpTooltip {
+	z-index: 1000;
+	position: absolute;
+	background-color: #e2f0ff;
+	padding: 0.6em 1.0em;
+	max-width: 40em;
+	-webkit-box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.33);
+	border: 1px solid #a8cfff;
+	-webkit-border-radius: 0;
+	line-height: 150%;
+	?font-size: 92%;
+	color: #456;
+}
+
+#helpTooltip table * {
+	color: #567;
+}
+
+#helpTooltip p {
+	margin: 0.2em 0;
+}
+
+#helpTooltip hr {
+	border-top: solid 1px #c6d0df;
+	margin: 9px 0px;
+}
+
+#helpTooltip table {
+	border-spacing: 7px;
+}
+
+#helpTooltip td {
+	vertical-align: top;
+	line-height: 150%;
+}
