@@ -7,7 +7,7 @@
 
 ### 安装：
  - 方式1，chrome插件商店
-   - https://chrome.google.com/webstore/search/greenhub?hl=zh-CN ; 选择GreenHub，即可安装&使用。
+ --- https://chrome.google.com/webstore/search/greenhub?hl=zh-CN ; 选择GreenHub，即可安装&使用。
   
  - 方式2，下载插件安装
    - 1.下载GreenHub插件，地址：https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx ; 
