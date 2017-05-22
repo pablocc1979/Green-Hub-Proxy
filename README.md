@@ -8,9 +8,12 @@
 ### 安装：
  - 方式1，chrome插件商店
    - https://chrome.google.com/webstore/search/greenhub?hl=zh-CN ; 选择GreenHub，即可安装&使用。
-  
+   - 提醒：需要先具备访问google翻墙网络能力
+   
  - 方式2，下载插件安装
-   - 1.下载GreenHub插件，地址：https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx ; 
+   - 1.下载GreenHub插件，两个地址：
+    - http://pan.baidu.com/s/1gfyzWOV
+    - https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx 
    - 2.将下载后的GreenHub插件，拖拽到：chrome://extensions/ 即可安装&使用。
  - 重要说明：
    - 如果您不能通过方式1 打开chrome插件商店的方式安装GreenHub，请使用方式2，下载插件并安装使用；由于Chrome不建议您安装chrome插件商店之外的软件，所以，我们建议您在通过方式2安装好GreenHub后，再通过方式1安装正式版本的GreenHub。
