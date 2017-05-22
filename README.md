@@ -7,7 +7,7 @@
 
 ### 安装方法1：下载插件、离线安装
  1. 下载GreenHub.crx，以下两个地址、任选一皆可：
-   * 百度网盘：http://pan.baidu.com/s/1gfyzWOV
+   * 百度网盘：http://pan.baidu.com/s/1gfyzWOV  (推荐） 
    * github: https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx 
    
    
