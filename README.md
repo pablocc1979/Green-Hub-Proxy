@@ -6,10 +6,10 @@
  - 无需注册、无需账号，免费服务，学术研究之利器
 
 ### 安装：
- * 方式1，下载插件、离线安装
-   * 下载GreenHub插件，两个地址：
-     * 百度网盘：http://pan.baidu.com/s/1gfyzWOV
-     * github: https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx 
+ * 方式1，下载插件、离线安装 
+  * 下载GreenHub插件，两个地址：
+   * 百度网盘：http://pan.baidu.com/s/1gfyzWOV
+   * github: https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx 
    * 将下载后的GreenHub插件，拖拽到：chrome://extensions/ 即可安装&使用
    * 两步即可安装：具体请参考该文件夹里文档和视频演示 http://pan.baidu.com/s/1gfyzWOV
 
