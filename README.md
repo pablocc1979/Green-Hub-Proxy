@@ -6,13 +6,14 @@
  - 无需注册、无需账号，免费服务，学术研究之利器
 
 ### 安装方法1：下载插件、离线安装
- 1. 先下载GreenHub.crx，以下两个地址：
+ 1. 下载GreenHub.crx，以下两个地址、任选一皆可：
    * 百度网盘：http://pan.baidu.com/s/1gfyzWOV
    * github: https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx 
+   
  2. 两步即可安装&使用
-   * Chrome浏览器中输入:  chrome://extensions/ ，再选中“开发者模式”
-   * 将GreenHub.crx文件，拖拽到：chrome浏览器窗口， 即可
-   * 具体请参考该文档和视频录屏演示 http://pan.baidu.com/s/1gfyzWOV
+   * Chrome浏览器中输入:  chrome://extensions/ ，再选中“开发者模式”
+   * 将GreenHub.crx文件，拖拽到：chrome浏览器窗口， 即可
+   * 具体请参考该文档和视频录屏演示 http://pan.baidu.com/s/1gfyzWOV
    
 ### 安装方法2：chrome插件商店、正式安装
 * https://chrome.google.com/webstore/search/greenhub?hl=zh-CN ; 选择GreenHub，即可安装&使用 
