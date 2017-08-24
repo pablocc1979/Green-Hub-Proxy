@@ -1,5 +1,5 @@
 
-# Green-Hub-Proxy 网络服务
+# GreenHub-Proxy 网络服务
 
 ### 功能特色：
  - 翻越网关，工作研究，Google学术搜索，Facebook资料查找，共享网络节点资源
