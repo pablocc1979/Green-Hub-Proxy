@@ -1,9 +1,0 @@
-{
-  "libs": [
-    "chai"
-  ],
-  "plugins": {
-    "node": {},
-    "coffee": {}
-  }
-}

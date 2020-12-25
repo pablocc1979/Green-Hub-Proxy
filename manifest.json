@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "homepage_url": "http://localhost:8080/",
+  "description": "GreenHub Proxy",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking",
+    "alarms",
+    "<all_urls>"
+  ],
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extName__",
+    "default_icon": {
+      "32": "icons/disabled32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "version": "0.9.0",
+  "content_security_policy": "script-src 'self' ; object-src 'self'"
+}

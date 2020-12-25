@@ -7,19 +7,20 @@
 
 ### 安装方法1：下载插件、离线安装
 
-1. 下载GreenHub.crx，以下两个地址、任选一皆可： 
-  * 百度网盘：http://pan.baidu.com/s/1gfyzWOV  (推荐）  
-  * github: https://github.com/pablocc1979/Green-Hub-Proxy/raw/master/hubproxy/greenhub.crx  
+1. 下载GreenHub.zip，以下三个地址、任选一皆可： 
+  * 百度网盘：**敬请期待**
+  * github: https://github.com/pablocc1979/Green-Hub-Proxy/releases
+  * github: https://github.com/pablocc1979/Green-Hub-Proxy/archive/master.zip
    
    
 2. 只需两步、即可安装&使用 
+  * 解压 zip 压缩包到常用目录（**安装完成后也不可以删除，否则会导致插件失效**）
   * Chrome浏览器中输入:  chrome://extensions/ ，再选中“开发者模式” 
-  * 将GreenHub.crx文件，拖拽到：chrome浏览器窗口， 即可 
-  * 具体请参考该文档和视频录屏演示 http://pan.baidu.com/s/1gfyzWOV 
+  * 点击左上角的 “加载已解压的扩展程序” 选中刚刚解压过的目录即可（**不要选中其中的文件，选中目录即可按确认**）
    
    
 ### 安装方法2：chrome插件商店、正式安装
-* https://chrome.google.com/webstore/search/greenhub?hl=zh-CN ; 选择GreenHub，即可安装&使用 
+* **等待发布**
 * 提醒：需要先具备访问google翻墙网络能力 
    
 ### 申明
