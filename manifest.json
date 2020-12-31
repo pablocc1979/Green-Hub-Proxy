@@ -32,6 +32,6 @@
   "options_ui": {
     "page": "options.html"
   },
-  "version": "0.9.0",
+  "version": "0.9.1",
   "content_security_policy": "script-src 'self' ; object-src 'self'"
 }
