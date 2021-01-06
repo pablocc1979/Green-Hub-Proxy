@@ -20,7 +20,7 @@
    
    
 ### 安装方法2：chrome插件商店、正式安装
-* **等待发布**
+* 商店地址: [GreenHub Proxy](https://chrome.google.com/webstore/detail/greenhub-proxy/knmhokeiipedacnhpjklbjmfgedfohco)
 * 提醒：需要先具备访问google翻墙网络能力 
    
 ### 申明
