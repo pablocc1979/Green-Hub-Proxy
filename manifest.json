@@ -5,7 +5,7 @@
   "description": "GreenHub Proxy",
   "default_locale": "en",
   "permissions": [
-    "activeTab",
+    "cookies",
     "storage",
     "proxy",
     "webRequest",
@@ -29,9 +29,9 @@
       "32": "icons/disabled32.png"
     }
   },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'; frame-src 'self' *; child-src 'self' *",
   "options_ui": {
     "page": "options.html"
   },
-  "version": "0.9.1",
-  "content_security_policy": "script-src 'self' ; object-src 'self'"
+  "version": "0.9.2"
 }

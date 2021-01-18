@@ -1,4 +1,3 @@
-
 # GreenHub-Proxy 网络服务
 
 ### 功能特色：
@@ -6,8 +5,11 @@
  - 无需注册、无需账号，免费服务，学术研究之利器
 
 ### 安装方法1：下载插件、离线安装
+1. 下载 crx 包，离线安装（推荐。安装完成后，与线上安装方式效果相同，能够自动更新）:
+  * 在 relase 中下载 crx 包: https://github.com/pablocc1979/Green-Hub-Proxy/releases
+  * 打开 chrome://extension, 将 crx 包拖入即该页面即可安装
 
-1. 下载GreenHub.zip，以下三个地址、任选一皆可： 
+1. 下载GreenHub.zip，以下三个地址、任选一皆可: 
   * 百度网盘：**敬请期待**
   * github: https://github.com/pablocc1979/Green-Hub-Proxy/releases
   * github: https://github.com/pablocc1979/Green-Hub-Proxy/archive/master.zip
