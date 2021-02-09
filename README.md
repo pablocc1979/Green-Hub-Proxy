@@ -5,20 +5,11 @@
  - 无需注册、无需账号，免费服务，学术研究之利器
 
 ### 安装方法1：下载插件、离线安装
-1. 下载 crx 包，离线安装（推荐。安装完成后，与线上安装方式效果相同，能够自动更新）:
-  * 在 relase 中下载 crx 包: https://github.com/pablocc1979/Green-Hub-Proxy/releases
-  * 打开 chrome://extension, 将 crx 包拖入即该页面即可安装
+* 第一步: 下载 crx 包，离线安装（推荐★★★★★，安装后，与插件商店的安装方式相同，也能自动更新）:
+  * 在最新relase中、选择你要下载的版本crx文件安装包: https://github.com/pablocc1979/Green-Hub-Proxy/releases
+  * 或直接下载 该CRX文件安装包0.9.2：https://github.com/pablocc1979/Green-Hub-Proxy/releases/download/v0.9.2/greenhub-0.9.2.crx
+* 第二步： 在浏览器中，打开页面 chrome://extension, 将 crx 包拖入即该页面、即可安装
 
-1. 下载GreenHub.zip，以下三个地址、任选一皆可: 
-  * 百度网盘：**敬请期待**
-  * github: https://github.com/pablocc1979/Green-Hub-Proxy/releases
-  * github: https://github.com/pablocc1979/Green-Hub-Proxy/archive/master.zip
-   
-   
-2. 只需两步、即可安装&使用 
-  * 解压 zip 压缩包到常用目录（**安装完成后也不可以删除，否则会导致插件失效**）
-  * Chrome浏览器中输入:  chrome://extensions/ ，再选中“开发者模式” 
-  * 点击左上角的 “加载已解压的扩展程序” 选中刚刚解压过的目录即可（**不要选中其中的文件，选中目录即可按确认**）
    
    
 ### 安装方法2：chrome插件商店、正式安装
@@ -32,8 +23,11 @@
 * 注3: 反馈统一提交到 https://github.com/pablocc1979/Green-Hub-Proxy/issues
 
 ### 已知问题
-1. 切换节点后，会出现登陆认证弹窗，刷新当前页面或点击取消即可
+1. 切换节点后，可能会有同步不及时、出现登陆认证弹窗，刷新当前页面或点击取消即可
 
-### 项目初衷
+### 项目初衷 和 愿望
  * 用了不少shadersocks、xx-net、go-agent方案，方案很技术化，也不太稳定；普通科研和行业朋友们，需要一个更稳定、更简单的方案
- * 这就是greenhub的初衷来源，只需安装一个chrome插件，无需那么多中间软件配置和安装，足够傻瓜式、简单稳定。
+ * 这就是greenhub的初衷：只需安装一个chrome插件，无需那么多中间软件配置和安装，足够傻瓜式、简单稳定。
+ * 愿望：持续提供一个足够稳定、简单、好用的网络翻墙服务；虽然中间被封禁、下架过一次，我们会持续服务。
+ * 感谢
+   * 衷心感谢提供国外节点的几位个人赞助；也衷心感谢给我们好评的用户、支持！
