@@ -1,4 +1,4 @@
-# GreenHub-Proxy 科学上网-科学翻墙-出海网络服务
+# GreenHub-Proxy 绿墙 - 科学上网翻墙服务
 
 ### 功能特色：
  - 翻越网关，工作研究，Google学术搜索，Facebook资料查找，共享网络节点资源
@@ -10,15 +10,13 @@
 * 第一步：下载 crx 包，离线安装（推荐★★★★★，安装后，与插件商店的安装方式相同，也能自动更新）:
 
   * 直接下载，CRX文件安装包0.9.2：[releases/download/v0.9.2/greenhub-0.9.2.crx](https://github.com/pablocc1979/Green-Hub-Proxy/releases/download/v0.9.2/greenhub-0.9.2.crx)
-  
-  * 或，你根据历史版本、选择某个具体crx后缀名的文件包下载
+  ```  
+  或者，还有一种稍复杂方式、自助选择具体CRX：
+  最新release具体文件目录为https://github.com/pablocc1979/Green-Hub-Proxy/releases
+  根据历史版本、选择某个具体crx后缀名的文件包下载
   ```
-  在最新release具体文件目录中、选择你要下载的具体版本crx包。
-  最新发布release文件目录在https://github.com/pablocc1979/Green-Hub-Proxy/releases
-  ```
   
-* 第二步：在浏览器中，打开页面 [chrome://extensions](chrome://extensions) 
-将 crx 包拖入即该页面、即可安装
+* 第二步：在浏览器中，打开页面 [chrome://extensions]( chrome://extensions )  ，你将 crx文件拖入即该页面、即可安装
 
    
    
