@@ -16,7 +16,7 @@
   根据历史版本、选择某个具体crx后缀名的文件包下载
   ```
   
-* 第二步：在浏览器中，打开页面 [chrome://extensions]( chrome://extensions )  ，你将 crx文件拖入即该页面、即可安装
+* 第二步：在Chrome浏览器中输入 chrome://extensions 打开手动模式，然后将 crx文件拖入即该页、即可安装
 
    
    
