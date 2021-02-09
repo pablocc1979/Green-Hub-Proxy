@@ -1,14 +1,16 @@
-# GreenHub-Proxy 网络服务
+# GreenHub-Proxy 科学上网-科学翻墙-出海网络服务
 
 ### 功能特色：
  - 翻越网关，工作研究，Google学术搜索，Facebook资料查找，共享网络节点资源
- - 无需注册、无需账号，免费服务，学术研究之利器
+ - 无需注册、无需账号，免费服务，个人研究、学术研究之利器
+ - 注1：因为网络节点宽带有限，为满足大部分人的间隔需求，每次连接有效期 30 分钟；
+ - 注2：请大家自觉使用，避免产生大量视频类流量，导致他人正常研发受影响
 
 ### 安装方法1：下载插件、离线安装
 * 第一步: 下载 crx 包，离线安装（推荐★★★★★，安装后，与插件商店的安装方式相同，也能自动更新）:
 
   * 直接下载CRX文件安装包0.9.2：[releases/download/v0.9.2/greenhub-0.9.2.crx](https://github.com/pablocc1979/Green-Hub-Proxy/releases/download/v0.9.2/greenhub-0.9.2.crx)
-  * 在最新relase文件目录中 https://github.com/pablocc1979/Green-Hub-Proxy/releases ，选择你要下载的具体版本crx包
+  * 在最新release文件目录中、选择你要下载的具体版本crx包。最新发布release文件目录在https://github.com/pablocc1979/Green-Hub-Proxy/releases
   
 * 第二步： 在浏览器中，打开页面 [chrome://extensions](chrome://extensions) , 将 crx 包拖入即该页面、即可安装
 
@@ -16,7 +18,7 @@
    
 ### 安装方法2：chrome插件商店、正式安装
 * 商店地址: [Chrome Store版-GreenHub Proxy](https://chrome.google.com/webstore/detail/greenhub-proxy/knmhokeiipedacnhpjklbjmfgedfohco)
-* 提醒：需先具备访问google翻墙网络能力 
+* 提醒：需先具备访问google翻墙网络能力，才能访问谷歌的Chrome store商店。
    
 ### 申明
 * 该服务仅供工作研究/学术讨论/行业研究人员使用；请勿用于非法活动！
