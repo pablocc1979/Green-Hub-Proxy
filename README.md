@@ -9,7 +9,7 @@
 ### 安装方法1：下载插件、离线安装，两步搞定。
 * 第一步：下载 crx 包，离线安装（推荐★★★★★，安装后，与插件商店的安装方式相同，也能自动更新）:
 
-  * 直接下载，CRX文件安装包0.9.2：[releases/download/v0.9.2/greenhub-0.9.2.crx](https://github.com/pablocc1979/Green-Hub-Proxy/releases/download/v0.9.2/greenhub-0.9.2.crx)
+  * 直接下载，CRX文件安装包：[releases/greenhub-final.crx](https://github.com/pablocc1979/Green-Hub-Proxy/releases/latest/download/greenhub-final.crx)
   ```  
   或者，还有一种稍复杂方式、自助选择具体CRX：
   最新release具体文件目录为https://github.com/pablocc1979/Green-Hub-Proxy/releases
@@ -19,11 +19,11 @@
 * 第二步：在Chrome浏览器中输入 chrome://extensions ，这样进入了手动安装模式、然后将 crx文件拖入即该页、即可安装
 
    
-   
+  
 ### 安装方法2：chrome插件商店、正式安装
 * 商店地址: [Chrome Store版-GreenHub Proxy](https://chrome.google.com/webstore/detail/greenhub-proxy/knmhokeiipedacnhpjklbjmfgedfohco)
 * 提醒：需先具备访问google翻墙网络能力，才能访问谷歌的Chrome store商店。
-   
+  
 ### 申明
 * 该服务仅供工作研究/学术讨论/行业研究人员使用；请勿用于非法活动！
 * 注1：如有问题，请在issues中发出问题或咨询，我会1~3天内回复和处理; 
